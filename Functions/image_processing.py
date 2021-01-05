@@ -57,7 +57,7 @@ def decode_img_ir(img, flag_tiff):
     #normalization_layer = tf.keras.layers.experimental.preprocessing.Rescaling(scale=1./127.5, offset=-1)
     if(not flag_tiff):
         # For PNG format.
-        img = tf.io.decode_image(img, channels=1)
+        img = tf.io.decode_image(img, channels=3)
         img = tf.cast(img, tf.float32)
         img = tf.image.resize_with_pad(img,384,512,method='bilinear',antialias=False)
         img = normalization_layer(img)
@@ -74,7 +74,7 @@ def decode_img_ir(img, flag_tiff):
         # Rescale.
         img = normalization_layer(img)
         # We convert it to a single-channel grayscale image.
-        img = tf.image.rgb_to_grayscale(img, name=None)
+        #img = tf.image.rgb_to_grayscale(img, name=None)
     return img
 #--------------------------------DECODING---------------------------------------
 

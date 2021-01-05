@@ -9,9 +9,9 @@
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
+from tensorflow.keras.layers import Conv2D, BatchNormalization, Conv2DTranspose, LeakyReLU, Flatten, Dense
 from Functions.utils import gradient
 from Functions.sn import SpectralNormalization
-from tensorflow.keras.layers import Conv2D, BatchNormalization, Conv2DTranspose, LeakyReLU, Flatten, Dense
 
 # Function that creates the Generator 1.
 def create_g1(spectral_norm):
@@ -74,7 +74,7 @@ def create_g1(spectral_norm):
         generator1.add(SpectralNormalization(Conv2DTranspose(64,(4,4), strides = (2,2), kernel_initializer=initializer, padding='same', activation='relu', use_bias=True)))
         generator1.add(BatchNormalization())
         # Seventh layer.
-        generator1.add(SpectralNormalization(Conv2DTranspose(1,(4,4), strides = (2,2), kernel_initializer=initializer, padding='same', activation='tanh', use_bias=True)))
+        generator1.add(SpectralNormalization(Conv2DTranspose(3,(4,4), strides = (2,2), kernel_initializer=initializer, padding='same', activation='tanh', use_bias=True)))
         #generator1.add(BatchNormalization())
     else:
         # Creating model.
@@ -131,7 +131,7 @@ def create_g1(spectral_norm):
         generator1.add(Conv2DTranspose(64,(4,4), strides = (2,2), kernel_initializer=initializer, padding='same', activation='relu', use_bias=True))
         generator1.add(BatchNormalization())
         # Seventh layer.
-        generator1.add(Conv2DTranspose(1,(4,4), strides = (2,2), kernel_initializer=initializer, padding='same', activation='tanh', use_bias=True))
+        generator1.add(Conv2DTranspose(3,(4,4), strides = (2,2), kernel_initializer=initializer, padding='same', activation='tanh', use_bias=True))
         #generator1.add(BatchNormalization())
 
     # Showing summary of the model.
@@ -149,7 +149,7 @@ def create_g2(spectral_norm):
         generator2 = keras.Sequential()
         # Input layer.
         #generator2.add(keras.Input(shape=(512, 384, 6), batch_size=32))
-        generator2.add(keras.Input(shape=(512, 384, 4)))
+        generator2.add(keras.Input(shape=(512, 384, 6)))
         # First layer.
         generator2.add(SpectralNormalization(Conv2DTranspose(256, (5, 5), strides = (1,1), kernel_initializer='he_uniform', padding='valid', use_bias=True)))
         generator2.add(BatchNormalization())
@@ -173,7 +173,7 @@ def create_g2(spectral_norm):
         generator2 = keras.Sequential()
         # Input layer.
         #generator2.add(keras.Input(shape=(512, 384, 6), batch_size=32))
-        generator2.add(keras.Input(shape=(512, 384, 4)))
+        generator2.add(keras.Input(shape=(512, 384, 6)))
         # First layer.
         generator2.add(Conv2DTranspose(256, (5, 5), strides = (1,1), kernel_initializer='he_uniform', padding='valid', use_bias=True))
         generator2.add(BatchNormalization())
@@ -210,7 +210,7 @@ def create_d(spectral_norm):
         discriminator = keras.Sequential()
         # Input layer.
         #discriminator.add(keras.Input(shape=(512, 384,3), batch_size=32))
-        discriminator.add(keras.Input(shape=(512, 384,)))
+        discriminator.add(keras.Input(shape=(512, 384,3)))
         # First layer.
         discriminator.add(SpectralNormalization(Conv2D(32, (3, 3), strides = (2,2), kernel_initializer='he_uniform', padding='valid', use_bias=True)))
         discriminator.add(LeakyReLU(alpha=0.2))
@@ -262,7 +262,7 @@ def create_d(spectral_norm):
     # Returning model.
     return discriminator
 
-#---------------------------------GEN1 UNET-------------------------------------
+#--------------------EXPERIMENTAL GEN1 UNET-------------------------------------
 def downsample(filters, size, apply_batchnorm=True):
     initializer = tf.random_normal_initializer(0., 0.02)
     result = tf.keras.Sequential()
@@ -310,7 +310,7 @@ def create_g1_unet():
     ]
 
     initializer = tf.random_normal_initializer(0., 0.02)
-    last = tf.keras.layers.Conv2DTranspose(1, 4,
+    last = tf.keras.layers.Conv2DTranspose(3, 4,
                                          strides=2,
                                          padding='same',
                                          kernel_initializer=initializer,
@@ -337,7 +337,7 @@ def create_g1_unet():
     g1_unet.summary()
 
     return g1_unet
-#---------------------------------GEN1 UNET-------------------------------------
+#--------------------EXPERIMENTAL GEN1 UNET-------------------------------------
 
 
 # Function that implements the loss function of the Generator 1.
@@ -362,7 +362,8 @@ def loss_g2(disc1_out_g2, disc2_out_g2, ir_in, rgb_in, out_g2, batch_size):
     # In here, [32,1] --> 32 is the batch size.
     g_loss_1 = tf.reduce_mean(tf.square(disc1_out_g2-tf.random.uniform(shape=[batch_size,1],minval=0.7,maxval=1.2,dtype=tf.float32)))
     g_loss_2 = tf.reduce_mean(tf.square(disc2_out_g2-tf.random.uniform(shape=[batch_size,1],minval=0.7,maxval=1.2,dtype=tf.float32)))
-    g_loss_3 = tf.reduce_mean(tf.square(tf.image.rgb_to_grayscale(out_g2) - ir_in))+(xi*tf.reduce_mean(tf.square(gradient(out_g2) - gradient(rgb_in))))
+    #g_loss_3 = tf.reduce_mean(tf.square(out_g2 - ir_in))+(xi*tf.reduce_mean(tf.square(gradient(tf.image.rgb_to_grayscale(out_g2)) - gradient(tf.image.rgb_to_grayscale(rgb_in)))))
+    g_loss_3 = tf.reduce_mean(tf.square(out_g2 - ir_in))+(xi*tf.reduce_mean(tf.square(gradient(out_g2) - gradient(rgb_in))))
     # Calculating total cost.
     # Calculating total cost.
     total_loss = g_loss_1 + g_loss_2 + (lambd*g_loss_3)
