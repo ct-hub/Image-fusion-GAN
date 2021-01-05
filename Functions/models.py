@@ -173,7 +173,7 @@ def create_g2(spectral_norm):
         generator2 = keras.Sequential()
         # Input layer.
         #generator2.add(keras.Input(shape=(512, 384, 6), batch_size=32))
-        generator2.add(keras.Input(shape=(512, 384, 6)))
+        generator2.add(keras.Input(shape=(512, 384, 4)))
         # First layer.
         generator2.add(Conv2DTranspose(256, (5, 5), strides = (1,1), kernel_initializer='he_uniform', padding='valid', use_bias=True))
         generator2.add(BatchNormalization())
