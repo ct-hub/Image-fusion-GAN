@@ -210,7 +210,7 @@ def create_d(spectral_norm):
         discriminator = keras.Sequential()
         # Input layer.
         #discriminator.add(keras.Input(shape=(512, 384,3), batch_size=32))
-        discriminator.add(keras.Input(shape=(512, 384,3)))
+        discriminator.add(keras.Input(shape=(512, 384,)))
         # First layer.
         discriminator.add(SpectralNormalization(Conv2D(32, (3, 3), strides = (2,2), kernel_initializer='he_uniform', padding='valid', use_bias=True)))
         discriminator.add(LeakyReLU(alpha=0.2))
