@@ -139,7 +139,7 @@ def test_set_eval(test_rgb, test_ir, test_params):
             data['en_fused'].append(en_fused)
             # Correlation Coefficient.
             # Between IR and generated IR. stats.pearsonr(a, b)
-            cc_ir_gir = round(stats.pearsonr(tf.image.rgb_to_grayscale(ir_img).numpy().flatten(), tf.image.rgb_to_grayscale(gir_img).numpy().flatten())[0], 4)
+            cc_ir_gir = round(stats.pearsonr(ir_img.numpy().flatten(), gir_img.numpy().flatten())[0], 4)
             #cc_ir_gir = stats.pearsonr(ir_img.flatten(), gir_img.flatten())
             #print("CC scipy: ", cc_ir_gir)
             data['cc_ir_gir'].append(cc_ir_gir)
@@ -147,7 +147,7 @@ def test_set_eval(test_rgb, test_ir, test_params):
             cc_rgb_fused = round( stats.pearsonr(tf.image.rgb_to_grayscale(rgb_img).numpy().flatten(), tf.image.rgb_to_grayscale(fused_img).numpy().flatten())[0], 4)
             data['cc_rgb_fused'].append(cc_rgb_fused)
             # Between IR and fused.
-            cc_ir_fused = round( stats.pearsonr(tf.image.rgb_to_grayscale(ir_img).numpy().flatten(), tf.image.rgb_to_grayscale(fused_img).numpy().flatten())[0], 4)
+            cc_ir_fused = round( stats.pearsonr(ir_img.numpy().flatten(), tf.image.rgb_to_grayscale(fused_img).numpy().flatten())[0], 4)
             data['cc_ir_fused'].append(cc_ir_fused)
             # PSNR.
             # Between IR and generated IR.
