@@ -25,6 +25,7 @@ def train(rgb_train, ir_train, train_params):
     epochs = train_params['EPOCHS']
     check_path = train_params['CHECK_PATH']
     batch_size = train_params['BATCH']
+    sample_img_dir = train_params['SAMPLE_IMG_DIR']
     # Loading learning rates.
     g1_lr = train_params['GEN1_LR']
     g2_lr = train_params['GEN2_LR']
