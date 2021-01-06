@@ -71,7 +71,7 @@ def single_image_test(params):
     rgb_save_path = save_path + "resized_rgb.png"
     gir_save_path = save_path + "gir.png"
     fused_save_path = save_path + "fused.png"
-    tf.keras.preprocessing.image.save_img(rgb_save_path, rgb_image_res[0], data_format="channels_last")
-    tf.keras.preprocessing.image.save_img(gir_save_path, gen1_out[0], data_format="channels_last")
-    tf.keras.preprocessing.image.save_img(fused_save_path, gen2_out[0], data_format="channels_last")
+    tf.keras.preprocessing.image.save_img(rgb_save_path, rgb_image_res[0].numpy(), data_format="channels_last")
+    tf.keras.preprocessing.image.save_img(gir_save_path, gen1_out[0].numpy(), data_format="channels_last")
+    tf.keras.preprocessing.image.save_img(fused_save_path, gen2_out[0].numpy(), data_format="channels_last")
     print("... done.")
