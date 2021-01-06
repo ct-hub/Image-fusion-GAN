@@ -32,7 +32,7 @@ def single_image_test(params):
     rgb_image = tf.keras.preprocessing.image.img_to_array(rgb_image)
     rgb_image = tf.cast(rgb_image, tf.float32)
     rgb_image_res = tf.image.resize_with_pad(rgb_image,384,512,method='bilinear',antialias=False)
-    rgb_image_res = tf.convert_to_tensor(rgb_image_res)
+    rgb_image_res = tf.expand_dims(rgb_image_res, axis=0).shape.as_list()
     # Resizing images with padding.
     print("... done.")
     # Loading model.
