@@ -32,7 +32,7 @@ def single_image_test(params):
     # Loading images.
     print("Loading images...")
     rgb_image = tf.keras.preprocessing.image.load_img(rgb_img_path)
-    rgb_image = tf.keras.preprocessing.image.img_to_array(rgb_image)
+    #rgb_image = tf.keras.preprocessing.image.img_to_array(rgb_image)
     rgb_image = tf.convert_to_tensor(rgb_image)
     rgb_image = tf.cast(rgb_image, tf.float32)
     rgb_image_res = tf.image.resize_with_pad(rgb_image,384,512,method='bilinear',antialias=False)
@@ -71,7 +71,7 @@ def single_image_test(params):
     rgb_save_path = save_path + "resized_rgb.png"
     gir_save_path = save_path + "gir.png"
     fused_save_path = save_path + "fused.png"
-    tf.keras.preprocessing.image.save_img(rgb_save_path, rgb_image_res, data_format="channels_last")
-    tf.keras.preprocessing.image.save_img(gir_save_path, gen1_out, data_format="channels_last")
-    tf.keras.preprocessing.image.save_img(fused_save_path, gen2_out, data_format="channels_last")
+    tf.keras.preprocessing.image.save_img(rgb_save_path, rgb_image_res[0], data_format="channels_last")
+    tf.keras.preprocessing.image.save_img(gir_save_path, gen1_out[0], data_format="channels_last")
+    tf.keras.preprocessing.image.save_img(fused_save_path, gen2_out[0], data_format="channels_last")
     print("... done.")
