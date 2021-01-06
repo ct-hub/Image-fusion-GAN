@@ -50,7 +50,7 @@ def main_menu(config):
                     raise ValueError
                 option_flag = True
             except ValueError:
-                print("Not a valid option! The number must be in the range of 1-4.")
+                print("Not a valid option! The number must be in the range of 1-5.")
         # Executing according to option.
         if(option == 1):
             print("Model training.")
