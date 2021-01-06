@@ -34,12 +34,13 @@ def single_image_test(params):
     rgb_image = tf.keras.preprocessing.image.load_img(rgb_img_path)
     rgb_image = tf.keras.preprocessing.image.img_to_array(rgb_image)
     rgb_image = tf.convert_to_tensor(rgb_image)
+    rgb_image = tf.cast(rgb_image, tf.float32)
+    rgb_image_res = tf.image.resize_with_pad(rgb_image,384,512,method='bilinear',antialias=False)
+    rgb_image_res = normalization_layer(rgb_image_res)
     print("Shape no batch: ", rgb_image.numpy().shape)
-    new_rgb_image = tf.expand_dims(rgb_image, axis=0)
+    rgb_image_res = tf.expand_dims(rgb_image_res, axis=0)
     print("Shape batch: ", new_rgb_image.numpy().shape)
-    #rgb_image = tf.cast(rgb_image, tf.float32)
-    #rgb_image_res = tf.image.resize_with_pad(rgb_image,384,512,method='bilinear',antialias=False)
-    #rgb_image_res = normalization_layer(rgb_image_res)
+
 
     # Resizing images with padding.
     print("... done.")
