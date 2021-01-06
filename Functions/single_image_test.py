@@ -36,9 +36,9 @@ def single_image_test(params):
     #rgb_image = tf.cast(rgb_image, tf.float32)
     #rgb_image_res = tf.image.resize_with_pad(rgb_image,384,512,method='bilinear',antialias=False)
     #rgb_image_res = normalization_layer(rgb_image_res)
-    print("Shape no batch: ", rgb_image_res.shape)
+    print("Shape no batch: ", rgb_image.shape)
     rgb_image_res = tf.expand_dims(rgb_image_res, axis=0).shape.as_list()
-    print("Shape batch: ", rgb_image_res.shape)
+    print("Shape batch: ", rgb_image.shape)
     # Resizing images with padding.
     print("... done.")
     # Loading model.
