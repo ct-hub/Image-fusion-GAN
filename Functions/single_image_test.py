@@ -7,6 +7,7 @@
 
 # Imports.
 import tensorflow as tf
+from tensorflow.keras import layers
 
 # Importing custom functions.
 from Functions.models import *
@@ -26,13 +27,18 @@ def single_image_test(params):
     g1_spec = params['GEN1_SPECTRAL']
     g2_spec = params['GEN2_SPECTRAL']
     g1_unet_flag = params['GEN1_UNET']
+    # Normalization layer.
+    normalization_layer = tf.keras.layers.experimental.preprocessing.Rescaling(1./255)
     # Loading images.
     print("Loading images...")
     rgb_image = tf.keras.preprocessing.image.load_img(rgb_img_path)
     rgb_image = tf.keras.preprocessing.image.img_to_array(rgb_image)
     rgb_image = tf.cast(rgb_image, tf.float32)
     rgb_image_res = tf.image.resize_with_pad(rgb_image,384,512,method='bilinear',antialias=False)
+    rgb_image_res = normalization_layer(rgb_image_res)
+    print("Shape no batch: ", rgb_image_res.shape)
     rgb_image_res = tf.expand_dims(rgb_image_res, axis=0).shape.as_list()
+    print("Shape batch: ", rgb_image_res.shape)
     # Resizing images with padding.
     print("... done.")
     # Loading model.
