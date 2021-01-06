@@ -39,7 +39,7 @@ def single_image_test(params):
     rgb_image_res = normalization_layer(rgb_image_res)
     print("Shape no batch: ", rgb_image.numpy().shape)
     rgb_image_res = tf.expand_dims(rgb_image_res, axis=0)
-    print("Shape batch: ", new_rgb_image.numpy().shape)
+    print("Shape batch: ", rgb_image_res.numpy().shape)
 
 
     # Resizing images with padding.
