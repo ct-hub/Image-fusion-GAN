@@ -10,6 +10,7 @@
 
 # Importing custom functions.
 from Functions.transfer_learning import *
+from Functions.single_image_test import *
 from Functions.image_processing import *
 from Functions.validation import *
 from Functions.models import *
@@ -41,16 +42,17 @@ def main_menu(config):
         print("2.- Get validation set results.")
         print("3.- Test the model on new dataset.")
         print("4.- Transfer learning on new dataset.")
-        print("5.- Exit.")
+        print("5.- Single image demo.")
+        print("6.- Exit.")
         # Validating input.
         while(not option_flag):
             try:
                 option = int(input('Selected option: '))
-                if(option < 1 or option > 5):
+                if(option < 1 or option > 6):
                     raise ValueError
                 option_flag = True
             except ValueError:
-                print("Not a valid option! The number must be in the range of 1-5.")
+                print("Not a valid option! The number must be in the range of 1-6.")
         # Executing according to option.
         if(option == 1):
             print("Model training.")
@@ -239,6 +241,19 @@ def main_menu(config):
             trans_params['GEN1_UNET'] = config['TRANSFER'].getboolean('GEN1_UNET')
             # Calling the train function.
             transfer_learning(rgb_images_train, ir_images_train, trans_params)
+            buffer = input("Done! Press any key to continue: ")
+        elif(option == 5):
+            print("Single image demo.")
+            # Unpacking parameters from config file.
+            demo_params = {}
+            demo_params['IMAGE_PATH_RGB'] = config['DEMO'].get('IMAGE_PATH_RGB')
+            demo_params['SAVE_PATH'] = config['DEMO'].get('SAVE_PATH')
+            demo_params['MODEL_PATH'] = config['DEMO'].get('MODEL_PATH')
+            demo_params['GEN1_SPECTRAL'] = config['DEMO'].getboolean('GEN1_SPECTRAL')
+            demo_params['GEN2_SPECTRAL'] = config['DEMO'].getboolean('GEN2_SPECTRAL')
+            demo_params['GEN1_UNET'] = config['DEMO'].getboolean('GEN1_UNET')
+            # Calling demo function.
+            single_image_test(demo_params)
             buffer = input("Done! Press any key to continue: ")
         else:
             menu_flag = True
