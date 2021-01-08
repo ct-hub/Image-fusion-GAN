@@ -8,7 +8,7 @@ It was also tested on two different versions of Tensorflow:
   * Tensorflow 2.3.1 (tested with no GPU support).
   * Tensorflow [pending] (tested with single GPU support).
   
-**Note:** For the h5 files to download correctly, it is necessary to have GitLFS installed.
+**Note:** For the h5 files to download correctly, it is necessary to have Git LFS installed.
   
 ### GPU support
 The code should run seamlessly if no GPU is detected. It is designed to work also with a single GPU (tested with a Tesla P100 GPU). You should specify in the **main.py** file the ID of the GPU you are using (even if you only have one). The latter is meant to prevent Tensorflow from allocating memory on multiple GPUs on a shared environment.
