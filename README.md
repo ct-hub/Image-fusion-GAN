@@ -1,5 +1,5 @@
 # Image fusion GAN
-Implementation of an extendend version of the GAN-based method for the fusion of visible-infrared images.
+Implementation of a GAN-based method for the fusion of visible-infrared images.
 
 ## System requirements
 
