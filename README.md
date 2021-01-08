@@ -3,7 +3,7 @@ Implementation of a GAN-based method for the fusion of visible-infrared images.
 
 ## System requirements
 
-**Note:** For the .h5 files to download correctly, you need to have GitLFS installed.
+**Note:** For the h5 files to download correctly, you need to have GitLFS installed.
 
 ## Model summary
 The basic structure is the one proposed by [Zhao et al.](https://www.hindawi.com/journals/mpe/2020/3739040/); for several implementation details (e.g. the number of neurons/filters per layer, among others), I referred to the [Pix2Pix model](https://paperswithcode.com/paper/image-to-image-translation-with-conditional) by Isola et al. for the Generator 1, and to the [FusionGAN model](https://www.researchgate.net/publication/327393843_FusionGAN_A_generative_adversarial_network_for_infrared_and_visible_image_fusion) by Ma et al. for the Genrator 2 and both discriminators.
