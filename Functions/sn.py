@@ -4,11 +4,7 @@
 # https://github.com/thisisiron/spectral_normalization-tf2                    *
 # *****************************************************************************
 
-
-#thisisiron
-
 import tensorflow as tf  # TF 2.0
-
 
 class SpectralNormalization(tf.keras.layers.Wrapper):
     def __init__(self, layer, iteration=1, eps=1e-12, training=True, **kwargs):

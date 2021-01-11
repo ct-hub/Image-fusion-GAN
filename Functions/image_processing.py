@@ -1,15 +1,12 @@
 #******************************************************************************
 # Image pre-processing functions.                                             *
 # @author Jorge Ciprián.                                                      *
-# Last updated: 23-10-2020.                                                   *
+# Last updated: 11-01-2020.                                                   *
 # *****************************************************************************
 
 
 # Imports.
-#import os
-#import PIL
 import glob
-#import PIL.Image
 import tensorflow as tf
 import tensorflow_io as tfio
 from tensorflow.keras import layers
@@ -23,8 +20,6 @@ def decode_img_rgb(img, flag_tiff):
     # Defining rescaling layer.
     # For [0, 1]
     normalization_layer = tf.keras.layers.experimental.preprocessing.Rescaling(1./255)
-    # For [-1, 1]
-    #normalization_layer = tf.keras.layers.experimental.preprocessing.Rescaling(scale=1./127.5, offset=-1)
     if(not flag_tiff):
         # For PNG format.
         img = tf.io.decode_image(img, channels=3)
@@ -53,8 +48,6 @@ def decode_img_ir(img, flag_tiff):
     # Defining rescaling layer.
     # For [0, 1]
     normalization_layer = tf.keras.layers.experimental.preprocessing.Rescaling(1./255)
-    # For [-1, 1]
-    #normalization_layer = tf.keras.layers.experimental.preprocessing.Rescaling(scale=1./127.5, offset=-1)
     if(not flag_tiff):
         # For PNG format.
         img = tf.io.decode_image(img, channels=3)
@@ -107,7 +100,7 @@ def configure_for_performance_(ds,batch_size,augment=False):
         ds_crop = ds.map(a_central_crop,num_parallel_calls=tf.data.experimental.AUTOTUNE)
         ds = ds.concatenate(ds_crop)
     ds_size = tf.data.experimental.cardinality(ds).numpy()
-    ds_size = ds_size*batch_size # 32 for the batch size.
+    ds_size = ds_size*batch_size
     #print("Size of dataset: ", tf.data.experimental.cardinality(ds).numpy())
     ds = ds.cache()
     ds = ds.shuffle(buffer_size=ds_size, seed=1)
@@ -199,3 +192,4 @@ def load_datasets(rgb_path, ir_path, v_split, batch_size):
         print("Prepared full IR batches: ",tf.data.experimental.cardinality(ir_images_full).numpy())
         # Return the two datasets.
         return rgb_images_full, ir_images_full
+#-----------------------LOADING DATASET AND PROCESSING IMAGES-------------------

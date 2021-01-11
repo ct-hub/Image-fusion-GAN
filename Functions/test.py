@@ -70,7 +70,6 @@ def test_set_eval(test_rgb, test_ir, test_params):
     # Image counter.
     img_count = 0
 
-    #--------temporal--------------
     # Iterating on dataset.
     for batch_rgb, batch_ir in zip(test_rgb, test_ir):
 
@@ -140,8 +139,6 @@ def test_set_eval(test_rgb, test_ir, test_params):
             # Correlation Coefficient.
             # Between IR and generated IR. stats.pearsonr(a, b)
             cc_ir_gir = round(stats.pearsonr(tf.image.rgb_to_grayscale(ir_img).numpy().flatten(), tf.image.rgb_to_grayscale(gir_img).numpy().flatten())[0], 4)
-            #cc_ir_gir = stats.pearsonr(ir_img.flatten(), gir_img.flatten())
-            #print("CC scipy: ", cc_ir_gir)
             data['cc_ir_gir'].append(cc_ir_gir)
             # Between RGB and fused.
             cc_rgb_fused = round( stats.pearsonr(tf.image.rgb_to_grayscale(rgb_img).numpy().flatten(), tf.image.rgb_to_grayscale(fused_img).numpy().flatten())[0], 4)

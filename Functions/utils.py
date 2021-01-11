@@ -12,10 +12,8 @@ import tensorflow as tf
 # implementation by Ma et al.
 def gradient(img):
     # Creating filter.
-    #filter = tf.reshape(tf.constant([[0.,1.,0.],[1.,-4.,1.],[0.,1.,0.]]),[3,3,1,1])
     filter = tf.reshape(tf.constant([[0.,1.,0.],[1.,-4.,1.],[0.,1.,0.],[0.,1.,0.],[1.,-4.,1.],[0.,1.,0.],[0.,1.,0.],[1.,-4.,1.],[0.,1.,0.]]),[3,3,3,1])
     # Applying convolution to image with filter.
     grad = tf.nn.conv2d(img,filter,strides=[1,1,1,1], padding='SAME')
-    #print(d)
     return grad
 #-------------------------------GRADIENT----------------------------------------

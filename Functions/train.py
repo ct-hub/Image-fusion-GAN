@@ -2,7 +2,7 @@
 # Functions for training the full DL model for image fusion.                  *
 #                                                                             *
 # @author Jorge Ciprián.                                                      *
-# Last updated: 15-12-2020.                                                   *
+# Last updated: 11-01-2020.                                                   *
 # *****************************************************************************
 
 # Imports.
@@ -61,7 +61,6 @@ def train(rgb_train, ir_train, train_params):
     print("Discriminator 2 summary:")
     disc_2 = create_d(d2_spec)
     # Creating an Adam optimizer.
-    # Original learning rate for all: 1e-4.
     # We use Two Time-Scale Update Rule:
     g1_optimizer = tf.keras.optimizers.Adam(learning_rate=g1_lr)
     g2_optimizer = tf.keras.optimizers.Adam(learning_rate=g2_lr)

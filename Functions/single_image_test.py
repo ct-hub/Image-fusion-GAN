@@ -41,7 +41,6 @@ def single_image_test(params):
     rgb_image_res = tf.expand_dims(rgb_image_res, axis=0)
     print("Shape batch: ", rgb_image_res.numpy().shape)
 
-
     # Resizing images with padding.
     print("... done.")
     # Loading model.

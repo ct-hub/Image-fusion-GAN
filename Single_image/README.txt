@@ -1,1 +1,1 @@
-Here should be the two images for testing the model on a single image pair.
+Here should be the visible image for the demo function.

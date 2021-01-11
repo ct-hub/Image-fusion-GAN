@@ -4,7 +4,7 @@
 # Tecnologico de Monterrey                                                     #
 # MSc Computer Science                                                         #
 # @ author Jorge Francisco Ciprian Sanchez                                     #
-# Last updated: 15-12-2019                                                     #
+# Last updated: 11-01-2019                                                     #
 ################################################################################
 
 
@@ -35,8 +35,6 @@ def main_menu(config):
         print("MSc Computer Science")
         print("Visible-infrared image fusion")
         print("Authors: Jorge Ciprian")
-        print("Based on the work by Zhao et al.: ")
-        print("https://www.hindawi.com/journals/mpe/2020/3739040/")
         print("Available options to execute:")
         print("1.- Train the model.")
         print("2.- Get validation set results.")

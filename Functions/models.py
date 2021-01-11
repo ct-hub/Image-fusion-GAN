@@ -2,7 +2,7 @@
 # Functions for creating the required CNN models, as well as related          *
 # functions such as training, testing, etc.                                   *
 # @author Jorge Ciprián.                                                      *
-# Last updated: 14-12-2020.                                                   *
+# Last updated: 11-01-2020.                                                   *
 # *****************************************************************************
 
 # Imports.
@@ -262,7 +262,10 @@ def create_d(spectral_norm):
     # Returning model.
     return discriminator
 
-#--------------------EXPERIMENTAL GEN1 UNET-------------------------------------
+#---------------------------------GEN1 UNET-------------------------------------
+# This section is adapted from the Pix2Pix Tensorflow implementation available
+# at: https://www.tensorflow.org/tutorials/generative/pix2pix
+
 def downsample(filters, size, apply_batchnorm=True):
     initializer = tf.random_normal_initializer(0., 0.02)
     result = tf.keras.Sequential()
@@ -337,7 +340,7 @@ def create_g1_unet():
     g1_unet.summary()
 
     return g1_unet
-#--------------------EXPERIMENTAL GEN1 UNET-------------------------------------
+#---------------------------------GEN1 UNET-------------------------------------
 
 
 # Function that implements the loss function of the Generator 1.
