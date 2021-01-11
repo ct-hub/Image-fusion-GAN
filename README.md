@@ -2,7 +2,7 @@
 Implementation of a GAN-based method for the fusion of visible-infrared images.
 
 ## System specifications
-This model was developed and tested on Ubuntu 16.04.6 LTS.
+This model was developed and tested on Ubuntu 16.04.6 LTS, Python 3.6.9, 
 
 It was also tested on two different versions of Tensorflow:
   * Tensorflow 2.3.1 (tested with no GPU support).
