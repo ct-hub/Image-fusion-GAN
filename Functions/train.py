@@ -139,7 +139,7 @@ def train(rgb_train, ir_train, train_params):
                 d1_optimizer.apply_gradients(zip(grads_disc1, disc_1.trainable_weights))
                 d2_optimizer.apply_gradients(zip(grads_disc2, disc_2.trainable_weights))
             # Saving sample images of batch.
-            if(save_flag):
+            if(save_flag and save_model):
                 if(epoch%1 == 0):
                     save_flag = False
                     # Getting sample images.

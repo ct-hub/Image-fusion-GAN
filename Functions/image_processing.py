@@ -144,7 +144,6 @@ def load_datasets(rgb_path, ir_path, v_split, batch_size):
         if((b'tiff' in f.numpy()) or (b'TIFF' in f.numpy())):
             flag_tiff = True
         else:
-            print("NO TIFF!!!!")
             flag_tiff = False
     # If the v_split flag is True, we divide the dataset into test and
     # validation sets. We perform data augmentation on the training dataset

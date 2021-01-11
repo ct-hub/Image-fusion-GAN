@@ -24,7 +24,7 @@ def create_g1(spectral_norm):
         generator1 = keras.Sequential()
         # Input layer.
         #generator1.add(keras.Input(shape=(512, 384, 3), batch_size=32))
-        generator1.add(keras.Input(shape=(512, 384, 3)))
+        generator1.add(keras.Input(shape=(384, 512, 3)))
         # Encoder.
         # First layer.
         generator1.add(SpectralNormalization(Conv2D(64, (4, 4), strides = (2,2), kernel_initializer=initializer, padding='same', use_bias=True)))
@@ -81,7 +81,7 @@ def create_g1(spectral_norm):
         generator1 = keras.Sequential()
         # Input layer.
         #generator1.add(keras.Input(shape=(512, 384, 3), batch_size=32))
-        generator1.add(keras.Input(shape=(512, 384, 3)))
+        generator1.add(keras.Input(shape=(384, 512, 3)))
         # Encoder.
         # First layer.
         generator1.add(Conv2D(64, (4, 4), strides = (2,2), kernel_initializer=initializer, padding='same', use_bias=True))
@@ -149,7 +149,7 @@ def create_g2(spectral_norm):
         generator2 = keras.Sequential()
         # Input layer.
         #generator2.add(keras.Input(shape=(512, 384, 6), batch_size=32))
-        generator2.add(keras.Input(shape=(512, 384, 6)))
+        generator2.add(keras.Input(shape=(384, 512, 6)))
         # First layer.
         generator2.add(SpectralNormalization(Conv2DTranspose(256, (5, 5), strides = (1,1), kernel_initializer='he_uniform', padding='valid', use_bias=True)))
         generator2.add(BatchNormalization())
@@ -173,7 +173,7 @@ def create_g2(spectral_norm):
         generator2 = keras.Sequential()
         # Input layer.
         #generator2.add(keras.Input(shape=(512, 384, 6), batch_size=32))
-        generator2.add(keras.Input(shape=(512, 384, 6)))
+        generator2.add(keras.Input(shape=(384, 512, 6)))
         # First layer.
         generator2.add(Conv2DTranspose(256, (5, 5), strides = (1,1), kernel_initializer='he_uniform', padding='valid', use_bias=True))
         generator2.add(BatchNormalization())
@@ -210,7 +210,7 @@ def create_d(spectral_norm):
         discriminator = keras.Sequential()
         # Input layer.
         #discriminator.add(keras.Input(shape=(512, 384,3), batch_size=32))
-        discriminator.add(keras.Input(shape=(512, 384,3)))
+        discriminator.add(keras.Input(shape=(384, 512,3)))
         # First layer.
         discriminator.add(SpectralNormalization(Conv2D(32, (3, 3), strides = (2,2), kernel_initializer='he_uniform', padding='valid', use_bias=True)))
         discriminator.add(LeakyReLU(alpha=0.2))
@@ -235,7 +235,7 @@ def create_d(spectral_norm):
         discriminator = keras.Sequential()
         # Input layer.
         #discriminator.add(keras.Input(shape=(512, 384,3), batch_size=32))
-        discriminator.add(keras.Input(shape=(512, 384,3)))
+        discriminator.add(keras.Input(shape=(384, 512,3)))
         # First layer.
         discriminator.add(Conv2D(32, (3, 3), strides = (2,2), kernel_initializer='he_uniform', padding='valid', use_bias=True))
         discriminator.add(LeakyReLU(alpha=0.2))
@@ -286,7 +286,7 @@ def upsample(filters, size, apply_dropout=False):
 
 def create_g1_unet():
     #inputs = tf.keras.layers.Input(shape=[256,256,3])
-    inputs = tf.keras.layers.Input(shape=[512, 384, 3])
+    inputs = tf.keras.layers.Input(shape=[384, 512, 3])
 
     down_stack = [
     downsample(64, 4, apply_batchnorm=False), # (bs, 128, 128, 64)
