@@ -7,6 +7,8 @@ This model was developed and tested on Ubuntu 16.04.6 LTS and Python 3.6.9.
 It was also tested on two different versions of Tensorflow:
   * Tensorflow 2.4.0 (tested with no GPU support).
   * Tensorflow 2.3.0 (tested with single GPU support).
+
+A sepparate requirements.txt file is provided. Each one reflects the dependencies used for the program on the GPU and non-GPU environments.
   
 **Note:** For the h5 files to download correctly, it is necessary to have Git LFS installed.
   
