@@ -2,11 +2,11 @@
 Implementation of a GAN-based method for the fusion of visible-infrared images.
 
 ## System specifications
-This model was developed and tested on Ubuntu 16.04.6 LTS, Python 3.6.9, 
+This model was developed and tested on Ubuntu 16.04.6 LTS and Python 3.6.9.
 
 It was also tested on two different versions of Tensorflow:
-  * Tensorflow 2.3.1 (tested with no GPU support).
-  * Tensorflow [pending] (tested with single GPU support).
+  * Tensorflow 2.4.0 (tested with no GPU support).
+  * Tensorflow 2.3.0 (tested with single GPU support).
   
 **Note:** For the h5 files to download correctly, it is necessary to have Git LFS installed.
   
