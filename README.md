@@ -20,6 +20,12 @@ The basic structure is the one proposed by [Zhao et al.](https://www.hindawi.com
 
 The model was extended by modifying the original architecture of the *Generator 1* from an encoder-decoder structure to a U-Net one. Additionally, the output layers of the generators were modified to allow for three-channel output images, and Spectral Normalization and the Two Time-Scale Update Rule (TTUR) were added for training stability. For more details on the architecture and the implemented extensions, see the paper here [link to arXiv or journal].
 
+## Running the program
+To run the program, just type the following in the terminal:
+```
+python main.py
+```
+
 ## Functionalities
 There are five functions available on the main menu of the program:
 
