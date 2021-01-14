@@ -1,5 +1,5 @@
 # Image fusion GAN
-Implementation of a GAN-based method for the fusion of visible-infrared images.
+Implementation of the *FIRe-GAN* model, a GAN-based method for the fusion of visible-infrared images.
 
 ## System specifications
 This model was developed and tested on Ubuntu 16.04.6 LTS and Python 3.6.9.
