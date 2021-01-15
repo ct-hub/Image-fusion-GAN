@@ -362,6 +362,7 @@ def loss_g1(d2_res_g1, g1_res, ir_in):
 def loss_g2(disc1_out_g2, disc2_out_g2, ir_in, rgb_in, out_g2, batch_size):
     xi = 8
     lambd = 100
+    gamma = 1
     # In here, [32,1] --> 32 is the batch size.
     g_loss_1 = tf.reduce_mean(tf.square(disc1_out_g2-tf.random.uniform(shape=[batch_size,1],minval=0.7,maxval=1.2,dtype=tf.float32)))
     g_loss_2 = tf.reduce_mean(tf.square(disc2_out_g2-tf.random.uniform(shape=[batch_size,1],minval=0.7,maxval=1.2,dtype=tf.float32)))
@@ -369,7 +370,7 @@ def loss_g2(disc1_out_g2, disc2_out_g2, ir_in, rgb_in, out_g2, batch_size):
     g_loss_3 = tf.reduce_mean(tf.square(out_g2 - ir_in))+(xi*tf.reduce_mean(tf.square(gradient(out_g2) - gradient(rgb_in))))
     # Calculating total cost.
     # Calculating total cost.
-    total_loss = g_loss_1 + g_loss_2 + (lambd*g_loss_3)
+    total_loss = (gamma*g_loss_1) + g_loss_2 + (lambd*g_loss_3)
     # Returning total result.
     return total_loss
 
