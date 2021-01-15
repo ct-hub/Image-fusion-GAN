@@ -8,3 +8,5 @@ Training parameters:
 - Learning rate generators: 5e-5.
 - Learning rate discriminators: 1e-4.
 - Batch size: 4.
+
+This model was pre-trained on the RGB-NIR dataset.
